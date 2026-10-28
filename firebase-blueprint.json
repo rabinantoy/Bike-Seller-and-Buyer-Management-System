@@ -1,0 +1,337 @@
+{
+  "entities": {
+    "Seller": {
+      "title": "Seller",
+      "description": "Registered motorcycle owner or partner dealership consigning bikes",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 32,
+          "description": "Unique seller ID (e.g. SEL-1001)"
+        },
+        "fullName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Full name or dealership title"
+        },
+        "mobileNumber": {
+          "type": "string",
+          "pattern": "^[0-9]{10}$",
+          "maxLength": 10,
+          "description": "10-digit Indian mobile number"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Email address"
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 250,
+          "description": "Street or business address"
+        },
+        "city": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "City of residence or operation"
+        },
+        "sellerType": {
+          "type": "string",
+          "enum": ["individual", "dealership"],
+          "description": "Individual owner or commercial dealership"
+        },
+        "registrationDate": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "Date format YYYY-MM-DD"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Consignment notes or history"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["id", "fullName", "mobileNumber", "city", "sellerType"]
+    },
+    "Buyer": {
+      "title": "Buyer",
+      "description": "Registered customer purchasing motorcycles with verified identity",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 32,
+          "description": "Unique buyer ID (e.g. BUY-2001)"
+        },
+        "fullName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Full legal name"
+        },
+        "mobileNumber": {
+          "type": "string",
+          "pattern": "^[0-9]{10}$",
+          "maxLength": 10,
+          "description": "10-digit Indian mobile number"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Email address"
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 250,
+          "description": "Residential address for RTO records"
+        },
+        "city": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "City"
+        },
+        "govIdType": {
+          "type": "string",
+          "enum": ["Aadhaar", "PAN Card", "Driving License", "Voter ID", "Passport"],
+          "description": "Government verification document type"
+        },
+        "govIdNumberMasked": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Masked ID reference preserving privacy (e.g. XXXX-XXXX-4519)"
+        },
+        "registrationDate": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "Registration date YYYY-MM-DD"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Customer preferences or loan notes"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "fullName", "mobileNumber", "city", "govIdType"]
+    },
+    "Bike": {
+      "title": "Bike",
+      "description": "Motorcycle inventory item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 32,
+          "description": "Unique bike stock ID (e.g. BIKE-3001)"
+        },
+        "brand": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Brand manufacturer (Royal Enfield, Yamaha, etc.)"
+        },
+        "modelName": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Model title and variant"
+        },
+        "registrationNumber": {
+          "type": "string",
+          "maxLength": 24,
+          "description": "Indian RTO registration plate number"
+        },
+        "manufacturingYear": {
+          "type": "number",
+          "description": "Year of manufacture"
+        },
+        "engineCapacityCc": {
+          "type": "number",
+          "description": "Displacement in cubic centimeters"
+        },
+        "fuelType": {
+          "type": "string",
+          "enum": ["Petrol", "Electric", "Hybrid"],
+          "description": "Engine fuel type"
+        },
+        "color": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Body color finish"
+        },
+        "kmDriven": {
+          "type": "number",
+          "description": "Odometer reading in kilometers"
+        },
+        "condition": {
+          "type": "string",
+          "enum": ["New", "Used"],
+          "description": "Showroom new or certified pre-owned"
+        },
+        "sellingPrice": {
+          "type": "number",
+          "description": "Asking price in Indian Rupees (₹)"
+        },
+        "sellerId": {
+          "type": "string",
+          "maxLength": 32,
+          "description": "Reference to Seller ID"
+        },
+        "dateAdded": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "Date added YYYY-MM-DD"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Available", "Reserved", "Sold"],
+          "description": "Inventory availability state"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Service and inspection remarks"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "brand", "modelName", "registrationNumber", "sellingPrice", "sellerId", "status"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Completed motorcycle purchase and sales invoice record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 32,
+          "description": "Unique transaction ID (e.g. TXN-5001)"
+        },
+        "bikeId": {
+          "type": "string",
+          "maxLength": 32,
+          "description": "Sold bike ID"
+        },
+        "sellerId": {
+          "type": "string",
+          "maxLength": 32,
+          "description": "Consigning seller ID"
+        },
+        "buyerId": {
+          "type": "string",
+          "maxLength": 32,
+          "description": "Purchasing buyer ID"
+        },
+        "originalAskingPrice": {
+          "type": "number"
+        },
+        "discount": {
+          "type": "number"
+        },
+        "finalSellingPrice": {
+          "type": "number"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": ["Cash", "UPI", "Bank Transfer", "Cheque", "Finance/EMI"]
+        },
+        "paymentStatus": {
+          "type": "string",
+          "enum": ["Paid", "Partially Paid", "Pending"]
+        },
+        "transactionDate": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "remarks": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Completed", "Cancelled"]
+        },
+        "cancelledReason": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "bikeId", "sellerId", "buyerId", "finalSellingPrice", "paymentMethod", "status"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Chronological audit trail for dealership actions",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 32
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userEmail": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "action": {
+          "type": "string",
+          "enum": ["CREATE", "UPDATE", "DELETE", "SALE", "CANCEL_TRANSACTION", "LOGIN", "LOGOUT", "SYSTEM_RESET"]
+        },
+        "entity": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "entityId": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "details": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "required": ["id", "timestamp", "userEmail", "action", "details"]
+    }
+  },
+  "firestore": {
+    "/sellers/{sellerId}": {
+      "schema": "Seller",
+      "description": "Collection of registered bike sellers and consignors"
+    },
+    "/buyers/{buyerId}": {
+      "schema": "Buyer",
+      "description": "Collection of registered motorcycle buyers and customers"
+    },
+    "/bikes/{bikeId}": {
+      "schema": "Bike",
+      "description": "Motorcycle inventory and showroom stock"
+    },
+    "/transactions/{txnId}": {
+      "schema": "Transaction",
+      "description": "Sales ledger and purchase agreements"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Dealership compliance audit records"
+    }
+  }
+}

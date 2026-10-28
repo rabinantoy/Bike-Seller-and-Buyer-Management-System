@@ -1,0 +1,6 @@
+{
+  "name": "Bike Seller & Buyer Management System",
+  "description": "Comprehensive motorcycle dealership management system for tracking bike inventory, sellers, buyers, sales transactions, receipts, and revenue analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
